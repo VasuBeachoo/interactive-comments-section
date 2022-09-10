@@ -11,16 +11,21 @@ export const RatingValue = styled.p``;
 
 export const PlusSign = styled.img.attrs({ src: iconPlus, alt: "plus-sign" })``;
 
-export const CommentRatingBox = styled.div``;
+export const RatingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-const CommentRating = ({ className, rating }) => {
+const Rating = ({ className, rating }) => {
   return (
-    <CommentRatingBox className={className}>
+    <RatingBox className={className}>
       <PlusSign />
       <RatingValue>{rating}</RatingValue>
       <MinusSign />
-    </CommentRatingBox>
+    </RatingBox>
   );
 };
 
-export default CommentRating;
+export default Rating;

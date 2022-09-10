@@ -7,7 +7,12 @@ export const ActionText = styled.p``;
 
 export const ActionIcon = styled.img``;
 
-export const CommentActionBox = styled.div``;
+export const CommentActionBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 const CommentAction = ({ className, iconSrc, iconAlt, text }) => {
   return (

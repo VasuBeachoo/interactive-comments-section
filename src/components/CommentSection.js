@@ -3,9 +3,19 @@ import CommentChain from "./CommentChain";
 import CommentInput from "./CommentInput";
 import * as users from "../users";
 
-export const CommentsBox = styled.div``;
+export const CommentsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
 
-export const CommentSectionBox = styled.div``;
+export const CommentSectionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
 
 const CommentSection = ({ className }) => {
   const data = {
