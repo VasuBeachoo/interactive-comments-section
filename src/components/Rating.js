@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeRating } from "../commentsSlice";
 import styled from "styled-components";
 import iconPlus from "../assets/icon-plus.svg";
 import iconMinus from "../assets/icon-minus.svg";
@@ -37,23 +39,42 @@ export const RatingBox = styled.div`
   }
 `;
 
-const Rating = ({ className, rating }) => {
+const Rating = ({ className, commentId, rating }) => {
+  const dispatch = useDispatch();
+
   const [selected, setSelected] = useState("none");
+
+  const handlePlusSignClick = () => {
+    if (selected === "plus") {
+      setSelected("none");
+      dispatch(changeRating({ id: commentId, rating: rating - 1 }));
+    } else {
+      setSelected("plus");
+      if (selected === "minus")
+        dispatch(changeRating({ id: commentId, rating: rating + 2 }));
+      else dispatch(changeRating({ id: commentId, rating: rating + 1 }));
+    }
+  };
+
+  const handleMinusSignClick = () => {
+    if (selected === "minus") {
+      setSelected("none");
+      dispatch(changeRating({ id: commentId, rating: rating + 1 }));
+    } else {
+      setSelected("minus");
+      if (selected === "plus")
+        dispatch(changeRating({ id: commentId, rating: rating - 2 }));
+      else dispatch(changeRating({ id: commentId, rating: rating - 1 }));
+    }
+  };
 
   return (
     <RatingBox className={className}>
-      <PlusSign
-        selected={selected === "plus"}
-        onClick={() =>
-          selected === "plus" ? setSelected("none") : setSelected("plus")
-        }
-      />
+      <PlusSign selected={selected === "plus"} onClick={handlePlusSignClick} />
       <RatingValue>{rating}</RatingValue>
       <MinusSign
         selected={selected === "minus"}
-        onClick={() =>
-          selected === "minus" ? setSelected("none") : setSelected("minus")
-        }
+        onClick={handleMinusSignClick}
       />
     </RatingBox>
   );

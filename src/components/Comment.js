@@ -86,12 +86,12 @@ export const CommentContainer = styled.div`
 const Comment = ({ className, data }) => {
   const currentUser = useSelector((state) => state.comments.data.currentUser);
 
-  const [replyInput, setReplyInput] = useState(false);
+  const [showReplyInput, setShowReplyInput] = useState(false);
 
   return (
     <CommentContainer className={className}>
       <CommentBox>
-        <CommentRating rating={data.score} />
+        <CommentRating commentId={data.id} rating={data.score} />
         <CommentInfoBox>
           {currentUser === data.user ? (
             <CurrentUserInfo />
@@ -121,11 +121,11 @@ const Comment = ({ className, data }) => {
               <EditAction />
             </>
           ) : (
-            <ReplyAction onClick={() => setReplyInput(!replyInput)} />
+            <ReplyAction onClick={() => setShowReplyInput(!showReplyInput)} />
           )}
         </ActionsBox>
       </CommentBox>
-      {replyInput && (
+      {showReplyInput && (
         <CommentInput placeholder="Add a reply..." btnText="Reply" />
       )}
     </CommentContainer>

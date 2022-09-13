@@ -24,12 +24,12 @@ export const CommentChainBox = styled.div`
   gap: 1.5rem;
 `;
 
-const CommentChain = ({ className, comment }) => {
+const CommentChain = ({ className, comment, replies }) => {
   return (
     <CommentChainBox className={className}>
       <Comment key={comment.id} data={comment} />
       <RepliesBox>
-        {comment.replies.map((reply) => (
+        {replies.map((reply) => (
           <Comment key={reply.id} data={reply} />
         ))}
       </RepliesBox>
