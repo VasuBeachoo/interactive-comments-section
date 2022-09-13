@@ -18,7 +18,7 @@ export const CommentSectionBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 1.5rem;
-  width: clamp(10rem, 85vw, 40rem);
+  width: clamp(10rem, 85vw, 50rem);
 `;
 
 const CommentSection = ({ className }) => {
@@ -74,7 +74,11 @@ const CommentSection = ({ className }) => {
           <CommentChain key={comment.id} comment={comment} />
         ))}
       </CommentsBox>
-      <CommentInput userAvatar={userAvatar} btnText="Send" />
+      <CommentInput
+        userAvatar={userAvatar}
+        placeholder="Add a comment..."
+        btnText="Send"
+      />
     </CommentSectionBox>
   );
 };

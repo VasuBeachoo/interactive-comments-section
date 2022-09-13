@@ -7,11 +7,27 @@ import { mixinBlock } from "../GlobalStyle";
 
 import userAvatar from "../assets/avatars/image-juliusomo.png";
 
+export const ActionsBox = styled.div`
+  grid-area: 1/ 3 / span 1 / span 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    grid-area: 3 / 3 / span 1 / span 1;
+  }
+`;
+
 export const CommentText = styled.p`
   grid-area: 2 / 2 / span 1 / span 2;
   color: var(--Grayish-blue);
   line-height: 2.35ch;
   margin: 0;
+
+  @media (max-width: 800px) {
+    grid-area: 2 / 1 / span 1 / span 3;
+  }
 `;
 
 export const CommentAge = styled.p`
@@ -35,10 +51,18 @@ export const CommentInfoBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 800px) {
+    grid-area: 1 / 1 / span 1 / span 3;
+  }
 `;
 
 export const CommentRating = styled(Rating)`
   grid-area: 1 / 1 / span 2 / span 1;
+
+  @media (max-width: 800px) {
+    grid-area: 3 / 1 / span 1 / span 1;
+  }
 `;
 
 export const CommentBox = styled.div`
@@ -54,7 +78,7 @@ export const CommentContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
 `;
 
 const Comment = ({ className, data }) => {
@@ -75,7 +99,9 @@ const Comment = ({ className, data }) => {
           )}
           {data.content}
         </CommentText>
-        <ReplyAction />
+        <ActionsBox>
+          <ReplyAction />
+        </ActionsBox>
       </CommentBox>
       <CommentInput userAvatar={userAvatar} btnText="Reply" />
     </CommentContainer>

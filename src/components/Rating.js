@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import iconPlus from "../assets/icon-plus.svg";
 import iconMinus from "../assets/icon-minus.svg";
-import { mixinRatingIcon } from "../GlobalStyle";
+import {
+  mixinHorizontalRating,
+  mixinRatingIcon,
+  mixinVerticalRating,
+} from "../GlobalStyle";
 
 export const MinusSign = styled.img.attrs({
   src: iconMinus,
@@ -20,16 +24,16 @@ export const PlusSign = styled.img.attrs({ src: iconPlus, alt: "plus-sign" })`
 `;
 
 export const RatingBox = styled.div`
+  ${mixinVerticalRating}
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-color: var(--Very-light-gray);
-  width: fit-content;
-  height: fit-content;
   border-radius: 0.75rem;
-  padding: 1.25rem 1rem;
-  margin: auto 0;
+
+  @media (max-width: 800px) {
+    ${mixinHorizontalRating}
+  }
 `;
 
 const Rating = ({ className, rating }) => {

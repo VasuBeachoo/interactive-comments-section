@@ -16,10 +16,15 @@ export const SubmitBtn = styled.button`
     cursor: pointer;
     opacity: 0.7;
   }
+
+  @media (max-width: 800px) {
+    align-self: flex-end;
+  }
 `;
 
 export const TextArea = styled.textarea.attrs({ rows: "4" })`
   flex-grow: 1;
+  resize: none;
   font-size: 0.9rem;
   border: 0.1rem solid var(--Light-gray);
   border-radius: 0.25rem;
@@ -29,6 +34,10 @@ export const TextArea = styled.textarea.attrs({ rows: "4" })`
 
   &:focus {
     border-color: var(--Grayish-blue);
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
   }
 `;
 
@@ -44,13 +53,17 @@ export const CommentInputBox = styled.div`
   align-items: flex-start;
   gap: 1rem;
   width: 100%;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
-const CommentInput = ({ className, userAvatar, btnText }) => {
+const CommentInput = ({ className, userAvatar, placeholder, btnText }) => {
   return (
     <CommentInputBox className={className}>
       {userAvatar && <AvatarImg src={userAvatar} />}
-      <TextArea />
+      <TextArea placeholder={placeholder} />
       <SubmitBtn>{btnText}</SubmitBtn>
     </CommentInputBox>
   );

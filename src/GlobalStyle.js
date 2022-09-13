@@ -29,6 +29,8 @@ const GlobalStyle = styled.createGlobalStyle`
 export const mixinBlock = css`
   background-color: var(--White);
   border-radius: 0.35rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   padding: 2rem;
 `;
 
@@ -41,6 +43,18 @@ export const mixinRatingIcon = css`
     cursor: pointer;
     filter: brightness(0.65);
   }
+`;
+
+export const mixinVerticalRating = css`
+  flex-direction: column;
+  padding: 1.25rem 1rem;
+  margin: auto 0;
+`;
+
+export const mixinHorizontalRating = css`
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0 1.25rem;
 `;
 
 export default GlobalStyle;
