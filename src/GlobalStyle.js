@@ -28,15 +28,18 @@ const GlobalStyle = styled.createGlobalStyle`
 
 export const mixinBlock = css`
   background-color: var(--White);
-  border-radius: 0.5rem;
+  border-radius: 0.35rem;
   padding: 2rem;
 `;
 
 export const mixinRatingIcon = css`
+  user-select: none;
   width: 0.85rem;
+  transition: 0.2s;
 
   &:hover {
     cursor: pointer;
+    filter: brightness(0.65);
   }
 `;
 

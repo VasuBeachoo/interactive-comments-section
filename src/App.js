@@ -9,6 +9,7 @@ const AppBox = styled.div`
   align-items: flex-start;
   width: 100%;
   min-height: 100vh;
+  padding: 3.5rem 2rem;
 `;
 
 const App = () => {

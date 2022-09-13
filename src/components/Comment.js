@@ -5,6 +5,8 @@ import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
 import CommentInput from "./CommentInput";
 import { mixinBlock } from "../GlobalStyle";
 
+import userAvatar from "../assets/avatars/image-juliusomo.png";
+
 export const CommentText = styled.p`
   grid-area: 2 / 2 / span 1 / span 2;
   color: var(--Grayish-blue);
@@ -52,6 +54,7 @@ export const CommentContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 0.5rem;
 `;
 
 const Comment = ({ className, data }) => {
@@ -74,7 +77,7 @@ const Comment = ({ className, data }) => {
         </CommentText>
         <ReplyAction />
       </CommentBox>
-      <CommentInput btnText="Reply" />
+      <CommentInput userAvatar={userAvatar} btnText="Reply" />
     </CommentContainer>
   );
 };

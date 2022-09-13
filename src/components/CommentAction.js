@@ -16,6 +16,13 @@ export const CommentActionBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  user-select: none;
+  transition: 0.25s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
 `;
 
 const CommentAction = ({ className, iconSrc, iconAlt, text }) => {

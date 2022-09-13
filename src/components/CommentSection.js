@@ -3,6 +3,8 @@ import CommentChain from "./CommentChain";
 import CommentInput from "./CommentInput";
 import * as users from "../users";
 
+import userAvatar from "../assets/avatars/image-juliusomo.png";
+
 export const CommentsBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,6 +17,7 @@ export const CommentSectionBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 1.5rem;
   width: clamp(10rem, 85vw, 40rem);
 `;
 
@@ -71,7 +74,7 @@ const CommentSection = ({ className }) => {
           <CommentChain key={comment.id} comment={comment} />
         ))}
       </CommentsBox>
-      <CommentInput btnText="Send" />
+      <CommentInput userAvatar={userAvatar} btnText="Send" />
     </CommentSectionBox>
   );
 };
