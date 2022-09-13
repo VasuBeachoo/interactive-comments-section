@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CurrentUserInfo from "./CurrentUserInfo";
 import { mixinBlock } from "../GlobalStyle";
 
 export const SubmitBtn = styled.button`
@@ -41,7 +42,7 @@ export const TextArea = styled.textarea.attrs({ rows: "4" })`
   }
 `;
 
-export const AvatarImg = styled.img.attrs({ alt: "user-avatar" })`
+export const AvatarImg = styled.img`
   width: 2.25rem;
 `;
 
@@ -59,10 +60,10 @@ export const CommentInputBox = styled.div`
   }
 `;
 
-const CommentInput = ({ className, userAvatar, placeholder, btnText }) => {
+const CommentInput = ({ className, placeholder, btnText }) => {
   return (
     <CommentInputBox className={className}>
-      {userAvatar && <AvatarImg src={userAvatar} />}
+      <CurrentUserInfo />
       <TextArea placeholder={placeholder} />
       <SubmitBtn>{btnText}</SubmitBtn>
     </CommentInputBox>

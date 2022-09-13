@@ -57,4 +57,13 @@ export const mixinHorizontalRating = css`
   padding: 0 1.25rem;
 `;
 
+export const mixinCommentAvatar = css`
+  width: 2rem;
+`;
+
+export const mixinCommentUsername = css`
+  font-weight: 500;
+  margin: 0;
+`;
+
 export default GlobalStyle;

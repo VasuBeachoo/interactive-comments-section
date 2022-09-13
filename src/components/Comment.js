@@ -3,9 +3,11 @@ import Rating from "./Rating";
 import UserTag from "./UserTag";
 import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
 import CommentInput from "./CommentInput";
-import { mixinBlock } from "../GlobalStyle";
-
-import userAvatar from "../assets/avatars/image-juliusomo.png";
+import {
+  mixinBlock,
+  mixinCommentAvatar,
+  mixinCommentUsername,
+} from "../GlobalStyle";
 
 export const ActionsBox = styled.div`
   grid-area: 1/ 3 / span 1 / span 1;
@@ -36,12 +38,11 @@ export const CommentAge = styled.p`
 `;
 
 export const CommentUsername = styled.p`
-  font-weight: 500;
-  margin: 0;
+  ${mixinCommentUsername}
 `;
 
 export const CommentAvatar = styled.img`
-  width: 2rem;
+  ${mixinCommentAvatar}
 `;
 
 export const CommentInfoBox = styled.div`
@@ -103,7 +104,7 @@ const Comment = ({ className, data }) => {
           <ReplyAction />
         </ActionsBox>
       </CommentBox>
-      <CommentInput userAvatar={userAvatar} btnText="Reply" />
+      <CommentInput btnText="Reply" />
     </CommentContainer>
   );
 };
