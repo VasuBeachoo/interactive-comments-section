@@ -41,8 +41,18 @@ export const mixinRatingIcon = css`
 
   &:hover {
     cursor: pointer;
-    filter: brightness(0.65);
   }
+
+  ${(props) =>
+    props.selected
+      ? css`
+          filter: brightness(0.35);
+        `
+      : css`
+          &:hover {
+            filter: brightness(0.65);
+          }
+        `}
 `;
 
 export const mixinVerticalRating = css`

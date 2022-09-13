@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Rating from "./Rating";
@@ -85,6 +86,8 @@ export const CommentContainer = styled.div`
 const Comment = ({ className, data }) => {
   const currentUser = useSelector((state) => state.comments.data.currentUser);
 
+  const [replyInput, setReplyInput] = useState(false);
+
   return (
     <CommentContainer className={className}>
       <CommentBox>
@@ -118,11 +121,13 @@ const Comment = ({ className, data }) => {
               <EditAction />
             </>
           ) : (
-            <ReplyAction />
+            <ReplyAction onClick={() => setReplyInput(!replyInput)} />
           )}
         </ActionsBox>
       </CommentBox>
-      <CommentInput placeholder="Add a reply..." btnText="Reply" />
+      {replyInput && (
+        <CommentInput placeholder="Add a reply..." btnText="Reply" />
+      )}
     </CommentContainer>
   );
 };

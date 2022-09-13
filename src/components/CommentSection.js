@@ -29,7 +29,7 @@ const CommentSection = ({ className }) => {
           <CommentChain key={comment.id} comment={comment} />
         ))}
       </CommentsBox>
-      <CommentInput placeholder="Add a comment..." btnText="Send" />
+      <CommentInput placeholder="Add a comment..." btnText="Add" />
     </CommentSectionBox>
   );
 };

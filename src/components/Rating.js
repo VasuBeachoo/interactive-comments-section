@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import iconPlus from "../assets/icon-plus.svg";
 import iconMinus from "../assets/icon-minus.svg";
@@ -37,11 +38,23 @@ export const RatingBox = styled.div`
 `;
 
 const Rating = ({ className, rating }) => {
+  const [selected, setSelected] = useState("none");
+
   return (
     <RatingBox className={className}>
-      <PlusSign />
+      <PlusSign
+        selected={selected === "plus"}
+        onClick={() =>
+          selected === "plus" ? setSelected("none") : setSelected("plus")
+        }
+      />
       <RatingValue>{rating}</RatingValue>
-      <MinusSign />
+      <MinusSign
+        selected={selected === "minus"}
+        onClick={() =>
+          selected === "minus" ? setSelected("none") : setSelected("minus")
+        }
+      />
     </RatingBox>
   );
 };

@@ -25,9 +25,9 @@ export const CommentActionBox = styled.div`
   }
 `;
 
-const CommentAction = ({ className, iconSrc, iconAlt, text }) => {
+const CommentAction = ({ className, iconSrc, iconAlt, text, onClick }) => {
   return (
-    <CommentActionBox className={className}>
+    <CommentActionBox className={className} onClick={onClick}>
       <ActionIcon src={iconSrc} alt={iconAlt} />
       <ActionText>{text}</ActionText>
     </CommentActionBox>
