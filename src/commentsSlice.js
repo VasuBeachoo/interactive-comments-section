@@ -4,6 +4,7 @@ import * as users from "./users";
 const commentsSlice = createSlice({
   name: "comments",
   initialState: {
+    commentId: 4,
     data: {
       currentUser: users.userJuliusomo,
       comments: [
@@ -47,13 +48,24 @@ const commentsSlice = createSlice({
     },
   },
   reducers: {
+    addComment: (state, action) => {
+      action.payload.id = state.commentId;
+      action.payload.createdAt = "Today";
+      action.payload.score = 0;
+      state.data.comments[state.commentId] = action.payload;
+    },
+    addReply: (state, action) => {
+      state.data.comments[action.payload].replies.push(state.commentId);
+    },
     changeRating: (state, action) => {
       console.log(action.payload);
       state.data.comments[action.payload.id].score = action.payload.rating;
     },
+    incrementCommentId: (state) => state.commentId++,
   },
 });
 
-export const { changeRating } = commentsSlice.actions;
+export const { addComment, addReply, changeRating, incrementCommentId } =
+  commentsSlice.actions;
 
 export default commentsSlice;

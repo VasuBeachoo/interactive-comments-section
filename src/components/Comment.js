@@ -79,8 +79,9 @@ export const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   gap: 0.65rem;
+  width: 100%;
 `;
 
 const Comment = ({ className, data }) => {
@@ -126,7 +127,13 @@ const Comment = ({ className, data }) => {
         </ActionsBox>
       </CommentBox>
       {showReplyInput && (
-        <CommentInput placeholder="Add a reply..." btnText="Reply" />
+        <CommentInput
+          commentId={data.id}
+          placeholder="Add a reply..."
+          btnText="Reply"
+          replyingTo={data.user}
+          hideReplyInput={() => setShowReplyInput(false)}
+        />
       )}
     </CommentContainer>
   );

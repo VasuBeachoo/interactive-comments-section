@@ -1,4 +1,6 @@
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addComment, addReply, incrementCommentId } from "../commentsSlice";
 import styled from "styled-components";
 import CurrentUserInfo from "./CurrentUserInfo";
 import { mixinBlock } from "../GlobalStyle";
@@ -73,17 +75,44 @@ export const CommentInputBox = styled.div`
   }
 `;
 
-const CommentInput = ({ className, placeholder, btnText }) => {
-  const avatarImg = useSelector(
-    (state) => state.comments.data.currentUser.image
-  );
+const CommentInput = ({
+  className,
+  commentId,
+  placeholder,
+  btnText,
+  replyingTo,
+  hideReplyInput,
+}) => {
+  const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.comments.data.currentUser);
+  const avatarImg = currentUser.image;
+
+  const [textContent, setTextContent] = useState("");
+
+  const handleSubmit = () => {
+    const newComment = {
+      content: textContent,
+      user: currentUser,
+      replyingTo: replyingTo,
+    };
+    dispatch(addComment(newComment));
+    dispatch(addReply(commentId));
+    dispatch(incrementCommentId);
+    setTextContent("");
+    hideReplyInput();
+  };
 
   return (
     <CommentInputBox className={className}>
       <AvatarImg src={avatarImg.src} alt={avatarImg.alt} />
       <InputCurrentUserInfo />
-      <TextArea placeholder={placeholder} />
-      <SubmitBtn>{btnText}</SubmitBtn>
+      <TextArea
+        placeholder={placeholder}
+        value={textContent}
+        onChange={(e) => setTextContent(e.target.value)}
+      />
+      <SubmitBtn onClick={handleSubmit}>{btnText}</SubmitBtn>
     </CommentInputBox>
   );
 };
