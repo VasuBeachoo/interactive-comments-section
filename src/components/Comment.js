@@ -3,16 +3,28 @@ import Rating from "./Rating";
 import UserTag from "./UserTag";
 import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
 import CommentInput from "./CommentInput";
+import { mixinBlock } from "../GlobalStyle";
 
 export const CommentText = styled.p`
   grid-area: 2 / 2 / span 1 / span 2;
+  color: var(--Grayish-blue);
+  line-height: 2.35ch;
+  margin: 0;
 `;
 
-export const CommentAge = styled.p``;
+export const CommentAge = styled.p`
+  color: var(--Grayish-blue);
+  margin: 0;
+`;
 
-export const CommentUsername = styled.p``;
+export const CommentUsername = styled.p`
+  font-weight: 500;
+  margin: 0;
+`;
 
-export const CommentAvatar = styled.img``;
+export const CommentAvatar = styled.img`
+  width: 2rem;
+`;
 
 export const CommentInfoBox = styled.div`
   grid-area: 1 / 2 / span 1 / span 1;
@@ -20,6 +32,7 @@ export const CommentInfoBox = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
 `;
 
 export const CommentRating = styled(Rating)`
@@ -27,8 +40,11 @@ export const CommentRating = styled(Rating)`
 `;
 
 export const CommentBox = styled.div`
+  ${mixinBlock}
   display: grid;
-  grid-template: auto / 1fr 1fr 1fr;
+  grid-template: auto / auto 1fr auto;
+  row-gap: 1rem;
+  column-gap: 2rem;
 `;
 
 export const CommentContainer = styled.div`

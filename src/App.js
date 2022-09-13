@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
 import CommentSection from "./components/CommentSection";
 
 const AppBox = styled.div`
@@ -13,6 +14,7 @@ const AppBox = styled.div`
 const App = () => {
   return (
     <AppBox>
+      <GlobalStyle />
       <CommentSection />
     </AppBox>
   );

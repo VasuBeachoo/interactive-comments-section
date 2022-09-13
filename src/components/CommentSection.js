@@ -15,6 +15,7 @@ export const CommentSectionBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: clamp(10rem, 85vw, 40rem);
 `;
 
 const CommentSection = ({ className }) => {
