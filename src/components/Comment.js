@@ -1,11 +1,14 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Rating from "./Rating";
 import UserTag from "./UserTag";
+import CurrentUserInfo from "./CurrentUserInfo";
 import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
 import CommentInput from "./CommentInput";
 import {
   mixinBlock,
   mixinCommentAvatar,
+  mixinCommentInfoBox,
   mixinCommentUsername,
 } from "../GlobalStyle";
 
@@ -15,6 +18,7 @@ export const ActionsBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1.35rem;
 
   @media (max-width: 800px) {
     grid-area: 3 / 3 / span 1 / span 1;
@@ -24,7 +28,7 @@ export const ActionsBox = styled.div`
 export const CommentText = styled.p`
   grid-area: 2 / 2 / span 1 / span 2;
   color: var(--Grayish-blue);
-  line-height: 2.35ch;
+  line-height: 2.5ch;
   margin: 0;
 
   @media (max-width: 800px) {
@@ -46,12 +50,8 @@ export const CommentAvatar = styled.img`
 `;
 
 export const CommentInfoBox = styled.div`
+  ${mixinCommentInfoBox}
   grid-area: 1 / 2 / span 1 / span 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
 
   @media (max-width: 800px) {
     grid-area: 1 / 1 / span 1 / span 3;
@@ -83,13 +83,24 @@ export const CommentContainer = styled.div`
 `;
 
 const Comment = ({ className, data }) => {
+  const currentUser = useSelector((state) => state.comments.data.currentUser);
+
   return (
     <CommentContainer className={className}>
       <CommentBox>
         <CommentRating rating={data.score} />
         <CommentInfoBox>
-          <CommentAvatar src={data.user.image.src} alt={data.user.image.alt} />
-          <CommentUsername>{data.user.username}</CommentUsername>
+          {currentUser === data.user ? (
+            <CurrentUserInfo />
+          ) : (
+            <>
+              <CommentAvatar
+                src={data.user.image.src}
+                alt={data.user.image.alt}
+              />
+              <CommentUsername>{data.user.username}</CommentUsername>
+            </>
+          )}
           <CommentAge>{data.createdAt}</CommentAge>
         </CommentInfoBox>
         <CommentText>
@@ -101,10 +112,17 @@ const Comment = ({ className, data }) => {
           {data.content}
         </CommentText>
         <ActionsBox>
-          <ReplyAction />
+          {currentUser === data.user ? (
+            <>
+              <DeleteAction />
+              <EditAction />
+            </>
+          ) : (
+            <ReplyAction />
+          )}
         </ActionsBox>
       </CommentBox>
-      <CommentInput btnText="Reply" />
+      <CommentInput placeholder="Add a reply..." btnText="Reply" />
     </CommentContainer>
   );
 };

@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CurrentUserInfo from "./CurrentUserInfo";
 import { mixinBlock } from "../GlobalStyle";
@@ -26,7 +27,7 @@ export const SubmitBtn = styled.button`
 export const TextArea = styled.textarea.attrs({ rows: "4" })`
   flex-grow: 1;
   resize: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   border: 0.1rem solid var(--Light-gray);
   border-radius: 0.25rem;
   outline: none;
@@ -42,8 +43,20 @@ export const TextArea = styled.textarea.attrs({ rows: "4" })`
   }
 `;
 
+export const InputCurrentUserInfo = styled(CurrentUserInfo)`
+  display: none;
+
+  @media (max-width: 800px) {
+    display: flex;
+  }
+`;
+
 export const AvatarImg = styled.img`
-  width: 2.25rem;
+  width: 2.5rem;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export const CommentInputBox = styled.div`
@@ -61,9 +74,14 @@ export const CommentInputBox = styled.div`
 `;
 
 const CommentInput = ({ className, placeholder, btnText }) => {
+  const avatarImg = useSelector(
+    (state) => state.comments.data.currentUser.image
+  );
+
   return (
     <CommentInputBox className={className}>
-      <CurrentUserInfo />
+      <AvatarImg src={avatarImg.src} alt={avatarImg.alt} />
+      <InputCurrentUserInfo />
       <TextArea placeholder={placeholder} />
       <SubmitBtn>{btnText}</SubmitBtn>
     </CommentInputBox>

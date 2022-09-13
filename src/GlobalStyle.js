@@ -57,6 +57,14 @@ export const mixinHorizontalRating = css`
   padding: 0 1.25rem;
 `;
 
+export const mixinCommentInfoBox = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+`;
+
 export const mixinCommentAvatar = css`
   width: 2rem;
 `;
