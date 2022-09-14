@@ -59,6 +59,9 @@ const commentsSlice = createSlice({
         (comment) => comment.id !== action.payload
       );
     },
+    updateComment: (state, action) => {
+      state.data.comments[action.payload.id].content = action.payload.content;
+    },
     addReply: (state, action) => {
       state.data.comments[action.payload].replies.push(state.commentId);
     },
@@ -81,6 +84,7 @@ const commentsSlice = createSlice({
 export const {
   addComment,
   deleteComment,
+  updateComment,
   addReply,
   removeReply,
   changeRating,

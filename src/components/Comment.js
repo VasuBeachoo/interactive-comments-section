@@ -5,8 +5,8 @@ import Rating from "./Rating";
 import UserTag from "./UserTag";
 import CurrentUserInfo from "./CurrentUserInfo";
 import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
-import CommentInput from "./CommentInput";
-import { deleteComment, removeReply } from "../commentsSlice";
+import CommentInput, { TextArea, SubmitBtn } from "./CommentInput";
+import { deleteComment, updateComment, removeReply } from "../commentsSlice";
 import {
   mixinBlock,
   mixinCommentAvatar,
@@ -15,7 +15,7 @@ import {
 } from "../GlobalStyle";
 
 export const ActionsBox = styled.div`
-  grid-area: 1/ 3 / span 1 / span 1;
+  grid-area: 1 / 3 / span 1 / span 1;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,6 +28,19 @@ export const ActionsBox = styled.div`
 
   @media (max-width: 420px) {
     grid-area: 4 / 1 / span 1 / span 1;
+  }
+`;
+
+export const EditBox = styled.div`
+  grid-area: 2 / 2 / span 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 1rem;
+
+  @media (max-width: 800px) {
+    grid-area: 2 / 1 / span 1 / span 3;
   }
 `;
 
@@ -95,11 +108,18 @@ const Comment = ({ className, commentId, replyId, data }) => {
   const currentUser = useSelector((state) => state.comments.data.currentUser);
 
   const [showReplyInput, setShowReplyInput] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [contentInput, setContentInput] = useState(data.content);
 
   const handleDeleteClick = () => {
     dispatch(deleteComment(data.id));
     if (replyId !== undefined)
       dispatch(removeReply({ commentId: commentId, replyId: replyId }));
+  };
+
+  const handleUpdateClick = () => {
+    dispatch(updateComment({ id: data.id, content: contentInput }));
+    setEditMode(false);
   };
 
   return (
@@ -120,19 +140,29 @@ const Comment = ({ className, commentId, replyId, data }) => {
           )}
           <CommentAge>{data.createdAt}</CommentAge>
         </CommentInfoBox>
-        <CommentText>
-          {data.replyingTo && (
-            <>
-              <UserTag username={data.replyingTo.username} />{" "}
-            </>
-          )}
-          {data.content}
-        </CommentText>
+        {editMode ? (
+          <EditBox>
+            <TextArea
+              value={contentInput}
+              onChange={(e) => setContentInput(e.target.value)}
+            />
+            <SubmitBtn onClick={handleUpdateClick}>Update</SubmitBtn>
+          </EditBox>
+        ) : (
+          <CommentText>
+            {data.replyingTo && (
+              <>
+                <UserTag username={data.replyingTo.username} />{" "}
+              </>
+            )}
+            {data.content}
+          </CommentText>
+        )}
         <ActionsBox>
           {currentUser === data.user ? (
             <>
               <DeleteAction onClick={handleDeleteClick} />
-              <EditAction />
+              <EditAction onClick={() => setEditMode(true)} />
             </>
           ) : (
             <ReplyAction onClick={() => setShowReplyInput(!showReplyInput)} />

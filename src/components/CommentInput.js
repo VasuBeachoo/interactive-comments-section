@@ -29,7 +29,9 @@ export const SubmitBtn = styled.button`
 export const TextArea = styled.textarea.attrs({ rows: "4" })`
   flex-grow: 1;
   resize: none;
+  width: 100%;
   font-size: 0.95rem;
+  line-height: 2.5ch;
   border: 0.1rem solid var(--Light-gray);
   border-radius: 0.25rem;
   outline: none;
@@ -38,10 +40,6 @@ export const TextArea = styled.textarea.attrs({ rows: "4" })`
 
   &:focus {
     border-color: var(--Grayish-blue);
-  }
-
-  @media (max-width: 800px) {
-    width: 100%;
   }
 `;
 
