@@ -54,8 +54,19 @@ const commentsSlice = createSlice({
       action.payload.score = 0;
       state.data.comments[state.commentId] = action.payload;
     },
+    deleteComment: (state, action) => {
+      state.data.comments = state.data.comments.filter(
+        (comment) => comment.id !== action.payload
+      );
+    },
     addReply: (state, action) => {
       state.data.comments[action.payload].replies.push(state.commentId);
+    },
+    removeReply: (state, action) => {
+      state.data.comments[action.payload.commentId].replies =
+        state.data.comments[action.payload.commentId].replies.filter(
+          (replyId) => replyId !== action.payload.replyId
+        );
     },
     changeRating: (state, action) => {
       console.log(action.payload);
@@ -67,7 +78,13 @@ const commentsSlice = createSlice({
   },
 });
 
-export const { addComment, addReply, changeRating, incrementCommentId } =
-  commentsSlice.actions;
+export const {
+  addComment,
+  deleteComment,
+  addReply,
+  removeReply,
+  changeRating,
+  incrementCommentId,
+} = commentsSlice.actions;
 
 export default commentsSlice;

@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Rating from "./Rating";
 import UserTag from "./UserTag";
 import CurrentUserInfo from "./CurrentUserInfo";
 import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
 import CommentInput from "./CommentInput";
+import { deleteComment, removeReply } from "../commentsSlice";
 import {
   mixinBlock,
   mixinCommentAvatar,
@@ -88,10 +89,18 @@ export const CommentContainer = styled.div`
   width: 100%;
 `;
 
-const Comment = ({ className, commentId, data }) => {
+const Comment = ({ className, commentId, replyId, data }) => {
+  const dispatch = useDispatch();
+
   const currentUser = useSelector((state) => state.comments.data.currentUser);
 
   const [showReplyInput, setShowReplyInput] = useState(false);
+
+  const handleDeleteClick = () => {
+    dispatch(deleteComment(data.id));
+    if (replyId !== undefined)
+      dispatch(removeReply({ commentId: commentId, replyId: replyId }));
+  };
 
   return (
     <CommentContainer className={className}>
@@ -122,7 +131,7 @@ const Comment = ({ className, commentId, data }) => {
         <ActionsBox>
           {currentUser === data.user ? (
             <>
-              <DeleteAction />
+              <DeleteAction onClick={handleDeleteClick} />
               <EditAction />
             </>
           ) : (

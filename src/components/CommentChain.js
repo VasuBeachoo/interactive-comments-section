@@ -20,7 +20,7 @@ export const CommentChainBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: flex-end;
   gap: 0.75rem;
 `;
 
@@ -31,7 +31,12 @@ const CommentChain = ({ className, comment, replies }) => {
       {replies.length !== 0 && (
         <RepliesBox>
           {replies.map((reply) => (
-            <Comment key={reply.id} commentId={comment.id} data={reply} />
+            <Comment
+              key={reply.id}
+              commentId={comment.id}
+              replyId={reply.id}
+              data={reply}
+            />
           ))}
         </RepliesBox>
       )}
