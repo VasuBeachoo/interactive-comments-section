@@ -73,6 +73,11 @@ export const mixinCommentInfoBox = css`
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 420px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const mixinCommentAvatar = css`

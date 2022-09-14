@@ -24,6 +24,10 @@ export const ActionsBox = styled.div`
   @media (max-width: 800px) {
     grid-area: 3 / 3 / span 1 / span 1;
   }
+
+  @media (max-width: 420px) {
+    grid-area: 4 / 1 / span 1 / span 1;
+  }
 `;
 
 export const CommentText = styled.p`
@@ -84,7 +88,7 @@ export const CommentContainer = styled.div`
   width: 100%;
 `;
 
-const Comment = ({ className, data }) => {
+const Comment = ({ className, commentId, data }) => {
   const currentUser = useSelector((state) => state.comments.data.currentUser);
 
   const [showReplyInput, setShowReplyInput] = useState(false);
@@ -92,7 +96,7 @@ const Comment = ({ className, data }) => {
   return (
     <CommentContainer className={className}>
       <CommentBox>
-        <CommentRating commentId={data.id} rating={data.score} />
+        <CommentRating ratingId={data.id} rating={data.score} />
         <CommentInfoBox>
           {currentUser === data.user ? (
             <CurrentUserInfo />
@@ -128,7 +132,7 @@ const Comment = ({ className, data }) => {
       </CommentBox>
       {showReplyInput && (
         <CommentInput
-          commentId={data.id}
+          commentId={commentId}
           placeholder="Add a reply..."
           btnText="Reply"
           replyingTo={data.user}

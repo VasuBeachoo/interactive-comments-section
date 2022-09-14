@@ -61,7 +61,9 @@ const commentsSlice = createSlice({
       console.log(action.payload);
       state.data.comments[action.payload.id].score = action.payload.rating;
     },
-    incrementCommentId: (state) => state.commentId++,
+    incrementCommentId: (state) => {
+      state.commentId = state.commentId + 1;
+    },
   },
 });
 

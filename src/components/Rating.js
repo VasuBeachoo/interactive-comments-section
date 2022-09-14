@@ -39,7 +39,7 @@ export const RatingBox = styled.div`
   }
 `;
 
-const Rating = ({ className, commentId, rating }) => {
+const Rating = ({ className, ratingId, rating }) => {
   const dispatch = useDispatch();
 
   const [selected, setSelected] = useState("none");
@@ -47,24 +47,24 @@ const Rating = ({ className, commentId, rating }) => {
   const handlePlusSignClick = () => {
     if (selected === "plus") {
       setSelected("none");
-      dispatch(changeRating({ id: commentId, rating: rating - 1 }));
+      dispatch(changeRating({ id: ratingId, rating: rating - 1 }));
     } else {
       setSelected("plus");
       if (selected === "minus")
-        dispatch(changeRating({ id: commentId, rating: rating + 2 }));
-      else dispatch(changeRating({ id: commentId, rating: rating + 1 }));
+        dispatch(changeRating({ id: ratingId, rating: rating + 2 }));
+      else dispatch(changeRating({ id: ratingId, rating: rating + 1 }));
     }
   };
 
   const handleMinusSignClick = () => {
     if (selected === "minus") {
       setSelected("none");
-      dispatch(changeRating({ id: commentId, rating: rating + 1 }));
+      dispatch(changeRating({ id: ratingId, rating: rating + 1 }));
     } else {
       setSelected("minus");
       if (selected === "plus")
-        dispatch(changeRating({ id: commentId, rating: rating - 2 }));
-      else dispatch(changeRating({ id: commentId, rating: rating - 1 }));
+        dispatch(changeRating({ id: ratingId, rating: rating - 2 }));
+      else dispatch(changeRating({ id: ratingId, rating: rating - 1 }));
     }
   };
 

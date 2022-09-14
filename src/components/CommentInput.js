@@ -94,13 +94,17 @@ const CommentInput = ({
     const newComment = {
       content: textContent,
       user: currentUser,
-      replyingTo: replyingTo,
     };
+    if (replyingTo) newComment.replyingTo = replyingTo;
+    else newComment.replies = [];
+
     dispatch(addComment(newComment));
-    dispatch(addReply(commentId));
-    dispatch(incrementCommentId);
+    if (commentId !== undefined) {
+      dispatch(addReply(commentId));
+      hideReplyInput();
+    }
+    dispatch(incrementCommentId());
     setTextContent("");
-    hideReplyInput();
   };
 
   return (

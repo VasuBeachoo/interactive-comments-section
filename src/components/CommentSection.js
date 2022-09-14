@@ -7,7 +7,7 @@ export const CommentsBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   gap: 1.5rem;
 `;
 
@@ -15,7 +15,7 @@ export const CommentSectionBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   gap: 1.5rem;
   width: clamp(10rem, 85vw, 50rem);
 `;
