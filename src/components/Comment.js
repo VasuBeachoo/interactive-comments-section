@@ -6,7 +6,7 @@ import UserTag from "./UserTag";
 import CurrentUserInfo from "./CurrentUserInfo";
 import { ReplyAction, DeleteAction, EditAction } from "./CommentAction";
 import CommentInput, { TextArea, SubmitBtn } from "./CommentInput";
-import { deleteComment, updateComment, removeReply } from "../commentsSlice";
+import { updateComment, changePopup, changePopupInfo } from "../commentsSlice";
 import {
   mixinBlock,
   mixinCommentAvatar,
@@ -112,9 +112,14 @@ const Comment = ({ className, commentId, replyId, data }) => {
   const [contentInput, setContentInput] = useState(data.content);
 
   const handleDeleteClick = () => {
-    dispatch(deleteComment(data.id));
-    if (replyId !== undefined)
-      dispatch(removeReply({ commentId: commentId, replyId: replyId }));
+    dispatch(changePopup("delete"));
+    dispatch(
+      changePopupInfo({
+        dataId: data.id,
+        commentId,
+        replyId,
+      })
+    );
   };
 
   const handleUpdateClick = () => {

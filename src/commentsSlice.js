@@ -4,8 +4,9 @@ import * as users from "./users";
 const commentsSlice = createSlice({
   name: "comments",
   initialState: {
-    popupType: "delete",
+    popupType: "",
     commentId: 4,
+    popupInfo: {},
     data: {
       currentUser: users.userJuliusomo,
       comments: [
@@ -79,6 +80,12 @@ const commentsSlice = createSlice({
     incrementCommentId: (state) => {
       state.commentId = state.commentId + 1;
     },
+    changePopup: (state, action) => {
+      state.popupType = action.payload;
+    },
+    changePopupInfo: (state, action) => {
+      state.popupInfo = action.payload;
+    },
   },
 });
 
@@ -90,6 +97,8 @@ export const {
   removeReply,
   changeRating,
   incrementCommentId,
+  changePopup,
+  changePopupInfo,
 } = commentsSlice.actions;
 
 export default commentsSlice;

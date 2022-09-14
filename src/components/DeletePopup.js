@@ -1,4 +1,6 @@
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { deleteComment, removeReply, changePopup } from "../commentsSlice";
 import { mixinDeletePopupBtn } from "../GlobalStyle";
 
 export const DeleteConfirmBtn = styled.button`
@@ -49,6 +51,22 @@ export const DeletePopupBox = styled.div`
 `;
 
 const DeletePopup = ({ className }) => {
+  const dispatch = useDispatch();
+
+  const popupInfo = useSelector((state) => state.comments.popupInfo);
+
+  const handleDeleteClick = () => {
+    dispatch(deleteComment(popupInfo.dataId));
+    if (popupInfo.replyId !== undefined)
+      dispatch(
+        removeReply({
+          commentId: popupInfo.commentId,
+          replyId: popupInfo.replyId,
+        })
+      );
+    dispatch(changePopup(""));
+  };
+
   return (
     <DeletePopupBox className={className}>
       <DeleteHeader>Delete comment</DeleteHeader>
@@ -57,8 +75,12 @@ const DeletePopup = ({ className }) => {
         comment and can't be undone.
       </DeleteText>
       <BtnsBox>
-        <DeleteCancelBtn>NO, CANCEL</DeleteCancelBtn>
-        <DeleteConfirmBtn>YES, DELETE</DeleteConfirmBtn>
+        <DeleteCancelBtn onClick={() => dispatch(changePopup(""))}>
+          NO, CANCEL
+        </DeleteCancelBtn>
+        <DeleteConfirmBtn onClick={handleDeleteClick}>
+          YES, DELETE
+        </DeleteConfirmBtn>
       </BtnsBox>
     </DeletePopupBox>
   );

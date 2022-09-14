@@ -12,6 +12,7 @@ const PopupBox = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  z-index: 3;
 `;
 
 const DarkOverlay = styled.div`
@@ -22,6 +23,7 @@ const DarkOverlay = styled.div`
   height: 100vh;
   background-color: #000000;
   opacity: 0.5;
+  z-index: 2;
 `;
 
 const AppBox = styled.div`
