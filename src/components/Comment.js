@@ -118,7 +118,7 @@ const Comment = ({ className, commentId, replyId, data }) => {
   };
 
   const handleUpdateClick = () => {
-    if (contentInput !== "") {
+    if (contentInput.trim() !== "") {
       dispatch(updateComment({ id: data.id, content: contentInput }));
       setEditMode(false);
     }

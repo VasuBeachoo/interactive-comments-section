@@ -89,7 +89,7 @@ const CommentInput = ({
   const [textContent, setTextContent] = useState("");
 
   const handleSubmit = () => {
-    if (textContent !== "") {
+    if (textContent.trim() !== "") {
       const newComment = {
         content: textContent,
         user: currentUser,
