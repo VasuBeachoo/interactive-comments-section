@@ -20,6 +20,10 @@ export const BtnsBox = styled.div`
   align-items: center;
   gap: 1.75rem;
   width: 100%;
+
+  @media (max-width: 340px) {
+    flex-direction: column;
+  }
 `;
 
 export const DeleteText = styled.p`
@@ -42,7 +46,7 @@ export const DeletePopupBox = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 1.25rem;
-  width: clamp(20rem, 80%, 30rem);
+  width: clamp(15rem, 80%, 30rem);
   background-color: var(--White);
   border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
