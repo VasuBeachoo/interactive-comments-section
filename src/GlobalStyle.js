@@ -89,4 +89,22 @@ export const mixinCommentUsername = css`
   margin: 0;
 `;
 
+export const mixinDeletePopupBtn = css`
+  all: unset;
+  text-align: center;
+  user-select: none;
+  color: var(--Light-gray);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 2.25ch;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  transition: 0.25s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+`;
+
 export default GlobalStyle;

@@ -4,6 +4,7 @@ import * as users from "./users";
 const commentsSlice = createSlice({
   name: "comments",
   initialState: {
+    popupType: "delete",
     commentId: 4,
     data: {
       currentUser: users.userJuliusomo,

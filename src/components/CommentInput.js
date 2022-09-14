@@ -7,8 +7,6 @@ import { mixinBlock } from "../GlobalStyle";
 
 export const SubmitBtn = styled.button`
   all: unset;
-  box-sizing: border-box;
-  font-family: "Rubik", sans-serif;
   user-select: none;
   background-color: var(--Moderate-blue);
   color: var(--White);
