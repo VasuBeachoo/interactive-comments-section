@@ -118,8 +118,10 @@ const Comment = ({ className, commentId, replyId, data }) => {
   };
 
   const handleUpdateClick = () => {
-    dispatch(updateComment({ id: data.id, content: contentInput }));
-    setEditMode(false);
+    if (contentInput !== "") {
+      dispatch(updateComment({ id: data.id, content: contentInput }));
+      setEditMode(false);
+    }
   };
 
   return (

@@ -89,20 +89,22 @@ const CommentInput = ({
   const [textContent, setTextContent] = useState("");
 
   const handleSubmit = () => {
-    const newComment = {
-      content: textContent,
-      user: currentUser,
-    };
-    if (replyingTo) newComment.replyingTo = replyingTo;
-    else newComment.replies = [];
+    if (textContent !== "") {
+      const newComment = {
+        content: textContent,
+        user: currentUser,
+      };
+      if (replyingTo) newComment.replyingTo = replyingTo;
+      else newComment.replies = [];
 
-    dispatch(addComment(newComment));
-    if (commentId !== undefined) {
-      dispatch(addReply(commentId));
-      hideReplyInput();
+      dispatch(addComment(newComment));
+      if (commentId !== undefined) {
+        dispatch(addReply(commentId));
+        hideReplyInput();
+      }
+      dispatch(incrementCommentId());
+      setTextContent("");
     }
-    dispatch(incrementCommentId());
-    setTextContent("");
   };
 
   return (
